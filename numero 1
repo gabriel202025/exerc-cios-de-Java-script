@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo de Média</title>
+  <style>
+    #resultado {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    .aprovado {
+      color: blue;
+    }
+    .reprovado {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cálculo de Média</h1>
+  <form onsubmit="return calcularMedia(event)">
+    <label for="nota1">Nota 1:</label>
+    <input type="number" id="nota1" step="0.01" required><br><br>
+
+    <label for="nota2">Nota 2:</label>
+    <input type="number" id="nota2" step="0.01" required><br><br>
+
+    <button type="submit">Calcular Média</button>
+  </form>
+
+  <div id="resultado">
+    Média: <span id="media"></span><br>
+    Situação: <span id="situacao"></span>
+  </div>
+
+  <script>
+    function calcularMedia(event) {
+      // Evitar o comportamento padrão do formulário
+      event.preventDefault();
+
+      // Obter as notas
+      let nota1 = parseFloat(document.getElementById("nota1").value);
+      let nota2 = parseFloat(document.getElementById("nota2").value);
+
+      // Calcular a média
+      let media = (nota1 + nota2) / 2;
+
+      // Determinar situação e cor
+      let situacao, cor;
+      if (media >= 6) {
+        situacao = "Aprovado";
+        cor = "aprovado";
+      } else {
+        situacao = "Reprovado";
+        cor = "reprovado";
+      }
+
+      // Exibir os resultados
+      document.getElementById("media").innerHTML = media.toFixed(2);
+      let situacaoSpan = document.getElementById("situacao");
+      situacaoSpan.innerHTML = situacao;
+      situacaoSpan.className = cor;
+    }
+  </script>
+</body>
+</html>
